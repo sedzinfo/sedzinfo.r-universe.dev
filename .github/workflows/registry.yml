@@ -1,0 +1,47 @@
+# Rebuilds packages.json, the list of R packages that R-universe builds and publishes at
+# https://sedzinfo.r-universe.dev (see .github/scripts/build_registry.py), and commits it when it
+# changes. A new public repository with an R package joins the universe within a day, with no
+# change here. From the Actions tab, "Run workflow" rebuilds it at once.
+name: Update package registry
+
+on:
+  schedule:
+    - cron: "37 4 * * *"       # every day at 04:37 UTC
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/registry.yml"
+      - ".github/scripts/build_registry.py"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: registry
+  cancel-in-progress: false
+
+jobs:
+  registry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build the package registry
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python3 .github/scripts/build_registry.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add packages.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Update package registry"
+          git pull --rebase
+          git push

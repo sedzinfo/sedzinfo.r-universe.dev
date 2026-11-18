@@ -1,0 +1,43 @@
+[
+  {
+    "package": "covid",
+    "url": "https://github.com/sedzinfo/covid"
+  },
+  {
+    "package": "golemcat",
+    "url": "https://github.com/sedzinfo/golemcat"
+  },
+  {
+    "package": "golemcrypto",
+    "url": "https://github.com/sedzinfo/golemcrypto"
+  },
+  {
+    "package": "golemenviro",
+    "url": "https://github.com/sedzinfo/golemenviro"
+  },
+  {
+    "package": "golemeurostat",
+    "url": "https://github.com/sedzinfo/golemeurostat"
+  },
+  {
+    "package": "golemirt",
+    "url": "https://github.com/sedzinfo/golemirt"
+  },
+  {
+    "package": "golemstockindices",
+    "url": "https://github.com/sedzinfo/golemstockindices"
+  },
+  {
+    "package": "golemworldbank",
+    "url": "https://github.com/sedzinfo/golemworldbank"
+  },
+  {
+    "package": "rwf",
+    "url": "https://github.com/sedzinfo/rwf",
+    "subdir": "rwf"
+  },
+  {
+    "package": "snp",
+    "url": "https://github.com/sedzinfo/snp"
+  }
+]
